@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Genjiro Ziro | MLBB Pro Player</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0a0a0f;
+      color: #f0f0f0;
+      font-family: 'Inter', 'Space Grotesk', sans-serif;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1a1a1f;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #00c8ff;
+      border-radius: 10px;
+    }
+
+    /* Global container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Fade-in animation on scroll */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s ease;
+    }
+    .fade-up.appear {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========== HERO SECTION ========== */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 680px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: url('https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover no-repeat;
+      background-attachment: fixed;
+    }
+    /* Fallback gaming image with ML vibe */
+    @media (max-width: 768px) {
+      .hero {
+        background-attachment: scroll;
+        background-position: 65% center;
+      }
+    }
+    /* Overlay gelap + gradien neon */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, rgba(0,0,0,0.85) 0%, rgba(8, 8, 20, 0.78) 100%);
+      backdrop-filter: brightness(0.9);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      padding: 0 20px;
+    }
+    .profile-img {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(0, 200, 255, 0.7);
+      box-shadow: 0 0 25px rgba(0, 200, 255, 0.4), 0 12px 28px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s;
+      margin-bottom: 24px;
+    }
+    .profile-img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 35px #00ccffaa;
+    }
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #FFFFFF, #8ae2ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .hero-tagline {
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #b0e0ff;
+      background: rgba(0, 30, 40, 0.5);
+      display: inline-block;
+      padding: 6px 20px;
+      border-radius: 40px;
+      backdrop-filter: blur(4px);
+      letter-spacing: 0.3px;
+    }
+    /* Wave / decorative */
+    .hero-wave {
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      z-index: 2;
+    }
+
+    /* Section umum */
+    section {
+      padding: 80px 0;
+      position: relative;
+    }
+    .section-title {
+      font-size: 2.3rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 48px;
+      letter-spacing: -0.3px;
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+    .section-title span {
+      background: linear-gradient(120deg, #00c8ff, #b26aff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      border-bottom: 3px solid #00c8ff;
+      padding-bottom: 8px;
+    }
+
+    /* About */
+    .about-text {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 1.2rem;
+      background: rgba(18, 18, 28, 0.6);
+      backdrop-filter: blur(4px);
+      padding: 32px 36px;
+      border-radius: 40px;
+      border: 1px solid rgba(0, 200, 255, 0.2);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      transition: all 0.3s;
+    }
+    .about-text:hover {
+      border-color: #00c8ff70;
+      box-shadow: 0 20px 40px rgba(0,200,255,0.1);
+    }
+
+    /* Role Grid Cards */
+    .role-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      justify-content: center;
+    }
+    .role-card {
+      background: #111118;
+      border-radius: 28px;
+      padding: 28px 20px;
+      width: 180px;
+      text-align: center;
+      backdrop-filter: blur(2px);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.05);
+      cursor: default;
+    }
+    .role-card i {
+      font-size: 2.8rem;
+      margin-bottom: 18px;
+      color: #58c4ff;
+      transition: 0.2s;
+    }
+    .role-card h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .role-card p {
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+    .role-card:hover {
+      transform: translateY(-10px);
+      border-color: #00c8ff;
+      box-shadow: 0 20px 30px -12px rgba(0,200,255,0.25);
+      background: #14141f;
+    }
+    /* Role utama (Jungler) highlight */
+    .role-highlight {
+      border: 2px solid #00ffff;
+      background: linear-gradient(145deg, #0d1a24, #0a0a12);
+      box-shadow: 0 0 18px #00ccff66;
+      position: relative;
+    }
+    .role-highlight i {
+      color: #0af;
+      text-shadow: 0 0 8px cyan;
+    }
+
+    /* Statistics grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 30px;
+      margin-top: 20px;
+    }
+    .stat-card {
+      background: rgba(15, 15, 22, 0.8);
+      backdrop-filter: blur(6px);
+      border-radius: 32px;
+      padding: 30px 20px;
+      text-align: center;
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      border: 1px solid rgba(0, 200, 255, 0.2);
+    }
+    .stat-card:hover {
+      transform: scale(1.03);
+      border-color: #00c8ff;
+      box-shadow: 0 15px 30px -10px rgba(0,200,255,0.3);
+      background: #11131f;
+    }
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff, #6ac8ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1.2;
+    }
+    .stat-label {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 12px;
+      font-weight: 500;
+      color: #b9d9ff;
+    }
+
+    /* Favorite Heroes */
+    .heroes-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+    .hero-card {
+      background: #0f0f17;
+      border-radius: 28px;
+      width: 210px;
+      padding: 20px 12px 24px;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid #2a2a3a;
+      cursor: pointer;
+    }
+    .hero-img {
+      width: 130px;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 16px;
+      transition: all 0.4s;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.4);
+      border: 2px solid #00b4ff66;
+    }
+    .hero-card:hover .hero-img {
+      transform: scale(1.08) rotate(2deg);
+      box-shadow: 0 0 20px #00ccffaa;
+      border-color: cyan;
+    }
+    .hero-card h4 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 10px 0 4px;
+    }
+    .hero-role {
+      font-size: 0.8rem;
+      color: #8bcbff;
+      background: #1e2a36;
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 30px;
+    }
+    .hero-card:hover {
+      transform: translateY(-8px);
+      background: #161622;
+      border-color: cyan;
+    }
+
+    /* Contact / Social */
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin: 30px 0 20px;
+    }
+    .social-icon {
+      background: #12121c;
+      width: 70px;
+      height: 70px;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      color: #d0eaff;
+      transition: all 0.25s ease;
+      border: 1px solid #2f3b4b;
+      text-decoration: none;
+    }
+    .social-icon:hover {
+      transform: translateY(-8px) scale(1.05);
+      color: #fff;
+      border-color: #0af;
+      box-shadow: 0 12px 20px -8px rgba(0,200,255,0.4);
+      background: #0af22;
+    }
+    .social-icon i {
+      transition: 0.2s;
+    }
+    .social-icon:hover i {
+      filter: drop-shadow(0 0 8px cyan);
+    }
+    .contact-email {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 1rem;
+      background: rgba(0,0,0,0.4);
+      display: inline-block;
+      width: auto;
+      padding: 12px 32px;
+      border-radius: 50px;
+      backdrop-filter: blur(6px);
+    }
+    .contact-email a {
+      color: #88ddff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    .contact-email a:hover {
+      color: white;
+      text-shadow: 0 0 5px cyan;
+    }
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(0,200,255,0.2);
+      margin-top: 40px;
+      background: #050507;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+      .hero-tagline {
+        font-size: 1rem;
+      }
+      .profile-img {
+        width: 130px;
+        height: 130px;
+      }
+      .section-title {
+        font-size: 1.9rem;
+      }
+      .about-text {
+        font-size: 1rem;
+        padding: 24px;
+      }
+      .role-card {
+        width: 150px;
+        padding: 20px 12px;
+      }
+      .stat-number {
+        font-size: 2.3rem;
+      }
+      .hero-img {
+        width: 100px;
+        height: 100px;
+      }
+      .hero-card {
+        width: 170px;
+      }
+      .social-icon {
+        width: 55px;
+        height: 55px;
+        font-size: 1.8rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 16px;
+      }
+      .role-grid {
+        gap: 16px;
+      }
+      .role-card {
+        width: calc(50% - 16px);
+      }
+      .stats-grid {
+        gap: 18px;
+      }
+    }
+    button, a {
+      transition: all 0.2s;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <img class="profile-img" src="IMG_20250803_174405.jpg" alt="Profile Picture Genjiro">
+      <h1>Ecko</h1>
+      <div class="hero-tagline">
+        <i class="fas fa-gamepad" style="margin-right: 8px;"></i> Mobile Legends Player | Jungler Main
+      </div>
+    </div>
+    <!-- decorative wave shape (opsional) -->
+    <svg class="hero-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" style="position: absolute; bottom:0; left:0; width:100%; z-index:3; opacity:0.4;"><path fill="#0a0a0f" fill-opacity="1" d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path></svg>
+  </section>
+
+  <main class="container">
+    <!-- ABOUT SECTION -->
+    <section id="about" class="fade-up">
+      <h2 class="section-title"><span>⚡ About Me</span></h2>
+      <div class="about-text">
+        <p style="margin-bottom: 18px;">Halo! Saya <strong>Ecko</strong>, seorang <strong>Jungler main</strong> yang sudah berpetualang di Land of Dawn sejak season 8. Dengan lebih dari 3400 pertandingan, saya mengandalkan map control, rotasi cepat, dan mekanik assassin yang mematikan.</p>
+        <p>Gaya bermain saya agresif namun kalkulatif, suka mengambil inisiasi early game untuk membangun momentum tim. Di luar kompetisi, saya juga streamer santai yang suka berbagi tips dan trick untuk push rank. Bagi saya, Mobile Legends bukan sekadar game, tapi seni kolaborasi dan strategi. Let's dominate the battlefield! 🔥</p>
+      </div>
+    </section>
+
+    <!-- ROLE SECTION -->
+    <section id="roles" class="fade-up">
+      <h2 class="section-title"><span>🎮 Main Roles</span></h2>
+      <div class="role-grid">
+        <!-- Jungler (utama) -->
+        <div class="role-card role-highlight">
+          <i class="fas fa-dragon"></i>
+          <h3>Jungler</h3>
+          <p>Assassin / Hyper-carry</p>
+        </div>
+        <div class="role-card">
+          <i class="fas fa-coins"></i>
+          <h3>Gold Lane</h3>
+          <p>Marksman / Burst</p>
+        </div>
+        <div class="role-card">
+          <i class="fas fa-shield-alt"></i>
+          <h3>EXP Lane</h3>
+          <p>Fighter / Offlaner</p>
+        </div>
+        <div class="role-card">
+          <i class="fas fa-map-marked-alt"></i>
+          <h3>Roamer</h3>
+          <p>Setup & Vision</p>
+        </div>
+        <div class="role-card">
+          <i class="fas fa-hat-wizard"></i>
+          <h3>Mid Lane</h3>
+          <p>Mage / Burst</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATISTICS SECTION -->
+    <section id="stats" class="fade-up">
+      <h2 class="section-title"><span>📊 Player Stats</span></h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">51.7%</div>
+          <div class="stat-label">Win Rate</div>
+          <i class="fas fa-chart-line" style="margin-top: 12px; opacity:0.7;"></i>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">Mythic<br>Glory 78</div>
+          <div class="stat-label">Current Rank</div>
+          <i class="fas fa-trophy" style="margin-top: 12px; color: gold;"></i>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">⚔️ Ling</div>
+          <div class="stat-label">Favorite Hero</div>
+          <i class="fas fa-star" style="margin-top: 8px;"></i>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">3,421</div>
+          <div class="stat-label">Total Matches</div>
+          <i class="fas fa-calendar-alt"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAVORITE HERO SECTION (Recommended) -->
+    <section id="favorites" class="fade-up">
+      <h2 class="section-title"><span>🏆 Main Hero Pool</span></h2>
+      <div class="heroes-grid">
+        <!-- Hero 1 : Ling -->
+        <div class="hero-card">
+          <img class="hero-img" src="https://www.mobafire.com/images/hero/icon/ling.png" alt="Ling" onerror="this.src='https://via.placeholder.com/130?text=Ling'">
+          <h4>Ling</h4>
+          <span class="hero-role">Assassin / Jungler</span>
+        </div>
+        <!-- Hero 2 : Fanny -->
+        <div class="hero-card">
+          <img class="hero-img" src="https://www.mobafire.com/images/hero/icon/fanny.png" alt="Fanny" onerror="this.src='https://via.placeholder.com/130?text=Fanny'">
+          <h4>Fanny</h4>
+          <span class="hero-role">Assassin / Hyper</span>
+        </div>
+        <!-- Hero 3 : Hayabusa -->
+        <div class="hero-card">
+          <img class="hero-img" src="https://www.mobafire.com/images/hero/icon/hayabusa.png" alt="Hayabusa" onerror="this.src='https://via.placeholder.com/130?text=Hayabusa'">
+          <h4>Hayabusa</h4>
+          <span class="hero-role">Assassin / Splitpush</span>
+        </div>
+        <!-- Hero 4 : Gusion -->
+        <div class="hero-card">
+          <img class="hero-img" src="https://www.mobafire.com/images/hero/icon/gusion.png" alt="Gusion" onerror="this.src='https://via.placeholder.com/130?text=Gusion'">
+          <h4>Gusion</h4>
+          <span class="hero-role">Assassin / Mage</span>
+        </div>
+      </div>
+      <p style="text-align: center; margin-top: 24px; opacity:0.7;">✦ “Master your main, respect your opponent” ✦</p>
+    </section>
+
+    <!-- CONTACT / SOCIAL MEDIA SECTION -->
+    <section id="contact" class="fade-up">
+      <h2 class="section-title"><span>📱 Connect With Me</span></h2>
+      <div class="social-links">
+        <a href="#" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-icon" target="_blank"><i class="fab fa-tiktok"></i></a>
+        <a href="#" class="social-icon" target="_blank"><i class="fab fa-discord"></i></a>
+        <a href="#" class="social-icon" target="_blank"><i class="fas fa-envelope"></i></a>
+      </div>
+      <div class="contact-email" style="text-align: center; margin-top: 20px;">
+        📧 <a href="mailto:genjiro.mlbb@example.com">genjiro.mlbb@example.com</a>  |  Discord: Genjiro#MLBB
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Genjiro Ziro — Mobile Legends Profile | Made for gamers, with passion.</p>
+  </footer>
+
+  <script>
+    // Intersection Observer untuk animasi fade-up saat scroll
+    const fadeElements = document.querySelectorAll('.fade-up');
+    
+    const appearOptions = {
+      threshold: 0.15,
+      rootMargin: "0px 0px -40px 0px"
+    };
+    
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('appear');
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+    
+    fadeElements.forEach(el => {
+      appearOnScroll.observe(el);
+    });
+    
+    // Untuk hero section mungkin tidak perlu fade, namun bisa juga langsung muncul
+    // efek hover smooth tambahan jika ingin memberi interaksi ke role card (sudah di css)
+    // Preload background hero alternatif jika gambar gagal load, kita set default (tetap oke)
+    // Dynamic background (ganti gambar dengan resolusi tinggi dan tema ML asli)
+    // tapi kita gunakan gambar premium gaming dengan kualitas tinggi, 
+    // juga bisa ditambahkan fallback manual jika ingin lebih ML vibe, tidak merusak.
+    // karena di hero bg kita gunakan gambar gaming esports, tapi user bisa mengganti.
+    // Opsi tambahan: mengganti background dengan gambar hero ML dari CDN (high quality)
+    // Untuk memenuhi "gambar hero Mobile Legends", kita bisa menyisipkan background alternatif melalui JS agar lebih relevan.
+    // Namun dari awal saya sudah set gambar keren gaming, saya akan ganti dengan gambar Mobile Legends high-res 
+    // yang tersedia secara publik, namun tetap menjaga konsistensi.
+    // Di bawah saya melakukan fine-tuning untuk menambah autentik Mobile Legends.
+    (function setPremiumMLBackground() {
+      // Mengganti background hero dengan wallpaper hero Mobile Legends (Gusion / Ling) agar sesuai tema
+      // Gambar dari sumber yang dapat diakses publik (high quality)
+      const heroSection = document.querySelector('.hero');
+      if (heroSection) {
+        // Background Mobile Legends resmi wallpapers (kualitas HD)
+        const mlBackgrounds = [
+          'https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=1600', // asli
+          'https://wallpapercave.com/wp/wp8029358.jpg',
+          'https://images6.alphacoders.com/114/1143119.jpg'
+        ];
+        // gunakan yang kedua agar lebih terlihat hero ML
+        heroSection.style.backgroundImage = `url('https://wallpapercave.com/wp/wp8029358.jpg')`;
+        heroSection.style.backgroundSize = 'cover';
+        heroSection.style.backgroundPosition = 'center 30%';
+        // fallback jika gambar error, tetap pakai style sebelumnya
+        const imgTest = new Image();
+        imgTest.src = 'https://wallpapercave.com/wp/wp8029358.jpg';
+        imgTest.onerror = () => {
+          heroSection.style.backgroundImage = `url('https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=1600')`;
+        }
+      }
+    })();
+
+    // Tambahkan efek hover halus pada link sosial
+    console.log("Mobile Legends personal portfolio ready — style professional & santai");
+  </script>
+</body>
+</html>
